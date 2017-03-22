@@ -20,6 +20,8 @@ javascript:(function() {
      recordIdSpan = document.createElement("span"),
      showSourceLinkHref = "./sourceRecord?vid="+urlParamVid+"&docId="+showPnxRecId,
      showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
+     /* showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
+     showRISLink = createLink (showRISLinkHref, "Show RIS"), */
      showPnxLinkHref;
 
    /* Change PNX-link for PCI-records */
@@ -38,6 +40,7 @@ javascript:(function() {
    /* No Source-links for Third Node (PCI) and SFX records */
    if (/^TN./.test(showPnxRecId) === false && /.*(sfx|SFX|Sfx).*/.test(showPnxRecId) === false ) {
      recordIdSpan.appendChild(showSourceLink);
+     /* recordIdSpan.appendChild(showRISLink); */
    }
 
    /* Append recordid and links only once */
