@@ -1,6 +1,6 @@
 javascript:(function() {
 
-  var showPnxLinkElem = document.querySelectorAll('prm-brief-result-container');
+  var showPnxLinkElem = document.querySelectorAll('prm-brief-result-container'),
    urlParamVid = location.search.split('vid=')[1].split('&')[0];
 
   function createLink (linkUrl, linkText) {
@@ -25,6 +25,7 @@ javascript:(function() {
      showRISLink = createLink (showRISLinkHref, "Show RIS"), */
      showPnxLinkHref = hrefBase+"&showPnx=true";
 
+   /* Show Pnx Link for Ebsco works only with camelcase "docId" */
    if ( /Ebsco/.test(hrefBase) ) {
      showPnxLinkHref = hrefBase.replace(/docid/, "docId")+"&showPnx=true";
    }
@@ -44,7 +45,7 @@ javascript:(function() {
    /* Append recordid and links only once */
    if (resultItemLastChild.className !== 'show-recordid') {
 
-   /* Prepend FRBR records with note */
+     /* Prepend FRBR records with note */
      if (showPnxLinkElem[i].querySelector('prm-search-result-frbr-line')) {
        var prefix = document.createElement("strong");
        prefix.innerHTML = 'FRBR preferred/generic record:';
