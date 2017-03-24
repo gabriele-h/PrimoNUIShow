@@ -18,17 +18,15 @@ javascript:(function() {
      resultItemChildren = showPnxLinkElem[i].parentNode.childNodes,
      resultItemLastChild = resultItemChildren[resultItemChildren.length - 1],
      recordIdSpan = document.createElement("span"),
-     showSourceLinkHref = "./sourceRecord?vid="+urlParamVid+"&docId="+showPnxRecId,
+     hrefBase = showPnxLinkElem[i].querySelector('.media-thumbnail').querySelector('a').getAttribute('ng-href'),
+     showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord").replace(/docid/, "docId"),
      showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
      /* showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
      showRISLink = createLink (showRISLinkHref, "Show RIS"), */
-     showPnxLinkHref;
+     showPnxLinkHref = hrefBase+"&showPnx=true";
 
-   /* Change PNX-link for PCI-records */
-   if (/^TN./.test(showPnxRecId) === false ) {
-     showPnxLinkHref = "./fulldisplay?vid="+urlParamVid+"&docid="+showPnxRecId+"&showPnx=true";
-   } else {
-     showPnxLinkHref = "./fulldisplay?vid="+urlParamVid+"&docid="+showPnxRecId+"&context=PC&showPnx=true";
+   if ( /Ebsco/.test(hrefBase) ) {
+     showPnxLinkHref = hrefBase.replace(/docid/, "docId")+"&showPnx=true";
    }
 
    var showPnxLink = createLink (showPnxLinkHref, "Show Pnx");
