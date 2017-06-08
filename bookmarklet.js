@@ -25,11 +25,6 @@ javascript:(function() {
      showRISLink = createLink (showRISLinkHref, "Show RIS"), */
      showPnxLinkHref = hrefBase+"&showPnx=true";
 
-   /* Show Pnx Link for Ebsco works only with camelcase "docId" */
-   if ( /Ebsco/.test(hrefBase) ) {
-     showPnxLinkHref = hrefBase.replace(/docid/, "docId")+"&showPnx=true";
-   }
-
    var showPnxLink = createLink (showPnxLinkHref, "Show Pnx");
    recordIdSpan.className = "show-recordid";
    recordIdSpan.innerHTML = showPnxRecId;
