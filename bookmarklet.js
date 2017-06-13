@@ -31,8 +31,8 @@ javascript:(function() {
    recordIdSpan.style.padding = "2em 0 0 0";
    recordIdSpan.appendChild(showPnxLink);
 
-   /* No Source-links for Third Node (PCI) and SFX records */
-   if (/^TN./.test(showPnxRecId) === false && /.*(sfx|SFX|Sfx).*/.test(showPnxRecId) === false ) {
+   /* No Source-links for Third Node (PCI, EBSCO etc.) records */
+   if (/^TN./.test(showPnxRecId) === false ) {
      recordIdSpan.appendChild(showSourceLink);
      /* recordIdSpan.appendChild(showRISLink); */
    }
