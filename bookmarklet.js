@@ -21,8 +21,8 @@ javascript:(function() {
      hrefBase = showPnxLinkElem[i].querySelector('.media-thumbnail').querySelector('a').getAttribute('ng-href'),
      showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord").replace(/docid/, "docId"),
      showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
-     /* showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
-     showRISLink = createLink (showRISLinkHref, "Show RIS"), */
+     showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
+     showRISLink = createLink (showRISLinkHref, "Show RIS"),
      showPnxLinkHref = hrefBase+"&showPnx=true";
 
    var showPnxLink = createLink (showPnxLinkHref, "Show Pnx");
@@ -34,7 +34,7 @@ javascript:(function() {
    /* No Source-links for Third Node (PCI, EBSCO etc.) records */
    if (/^TN./.test(showPnxRecId) === false ) {
      recordIdSpan.appendChild(showSourceLink);
-     /* recordIdSpan.appendChild(showRISLink); */
+     recordIdSpan.appendChild(showRISLink);
    }
 
    /* Append recordid and links only once */
