@@ -14,4 +14,9 @@ FRBR-groups will be prepended with a short note that these are represented by
 a preferred or generic record.
 
 ### Third Node Adaptors (PCI, EBSCO etc.)
-Third Node Adaptor records can not have their source record shown.
+Third Node Adaptor records can not have their source record or RIS shown.
+
+## PrimoVE
+
+Since show RIS only works in the old UI atm, this link is not available for
+PrimoVE.

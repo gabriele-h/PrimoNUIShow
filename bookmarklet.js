@@ -32,10 +32,15 @@ javascript:(function() {
    recordIdSpan.appendChild(showPnxLink);
 
    /* No Source-links for Third Node (PCI, EBSCO etc.) records */
-   if (/^TN./.test(showPnxRecId) === false ) {
+   if (/context=L/.test(hrefBase) === true) {
      recordIdSpan.appendChild(showSourceLink);
-     recordIdSpan.appendChild(showRISLink);
-   }
+     
+     /* No RIS-links for PrimoVE (no old UI to link to) */
+     if (/\/discovery\//.test(hrefBase) === false) {
+       recordIdSpan.appendChild(showRISLink);
+     }
+   
+   } 
 
    /* Append recordid and links only once */
    if (resultItemLastChild.className !== 'show-recordid') {
