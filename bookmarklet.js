@@ -22,14 +22,23 @@ javascript:(function() {
      showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord"),
      showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
      showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
-     showRISLink = createLink (showRISLinkHref, "Show RIS"),
+     showRISLink = createLink (showRISLinkHref, "Show RIS");
+
+   /* Service Pages via old UI for the time being */
+   if (/openurl/.test(location) === true) {
+     var templocation = location.href;
+     showPnxLinkHref = templocation.replace(/primo-explore/, "primo_library/libweb/action")+"&showPnx=true";
+   } else {
      showPnxLinkHref = hrefBase+"&showPnx=true";
+   }
 
    var showPnxLink = createLink (showPnxLinkHref, "Show Pnx");
    recordIdSpan.className = "show-recordid";
    recordIdSpan.innerHTML = showPnxRecId;
    recordIdSpan.style.padding = "2em 0 0 0";
-   recordIdSpan.appendChild(showPnxLink);
+   if (! /openurl/.test(hrefBase) === true && ! /\/discovery\//.test(hrefBase) ) {
+     recordIdSpan.appendChild(showPnxLink);
+   }
 
    /* No Source-links for Third Node (PCI, EBSCO etc.) records */
    if (/context=L/.test(hrefBase) === true) {
