@@ -19,7 +19,7 @@ javascript:(function() {
      resultItemLastChild = resultItemChildren[resultItemChildren.length - 1],
      recordIdSpan = document.createElement("span"),
      hrefBase = showPnxLinkElem[i].querySelector('.media-thumbnail').querySelector('a').getAttribute('ng-href'),
-     showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord"),
+     showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord").replace(/docid/, "docId"),
      showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
      showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
      showRISLink = createLink (showRISLinkHref, "Show RIS");
