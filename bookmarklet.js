@@ -16,10 +16,10 @@ javascript:(function() {
 
    var showPnxRecId = showPnxLinkElem[i].querySelector('.list-item-primary-content').getAttribute('data-recordid'),
      resultItemChildren = showPnxLinkElem[i].parentNode.childNodes,
-     resultItemLastChild = resultItemChildren[resultItemChildren.length - 1],
+     resultItemLastChild = resultItemChildren[resultItemChildren.length-1],
      recordIdSpan = document.createElement("span"),
      hrefBase = showPnxLinkElem[i].querySelector('.media-thumbnail').querySelector('a').getAttribute('ng-href'),
-     showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord").replace(/docid/, "docId"),
+     showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord").replace(/docid=.*?(&|$)/, "docId="+showPnxRecId+"$1"),
      showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
      showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
      showRISLink = createLink (showRISLinkHref, "Show RIS");
