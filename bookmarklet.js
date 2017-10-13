@@ -18,8 +18,8 @@ javascript:(function() {
      resultItemChildren = showPnxLinkElem[i].parentNode.childNodes,
      resultItemLastChild = resultItemChildren[resultItemChildren.length-1],
      recordIdSpan = document.createElement("span"),
-     hrefBase = showPnxLinkElem[i].querySelector('.media-thumbnail').querySelector('a').getAttribute('ng-href'),
-     showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord").replace(/docid=.*?(&|$)/, "docId="+showPnxRecId+"$1"),
+     hrefBase = showPnxLinkElem[i].querySelector('.media-thumbnail').querySelector('a').getAttribute('ng-href').replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1"),
+     showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord").replace(/docid=/, "docId="),
      showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
      showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
      showRISLink = createLink (showRISLinkHref, "Show RIS");
@@ -27,7 +27,7 @@ javascript:(function() {
    /* Service Pages via old UI for the time being */
    if (/openurl/.test(location) === true) {
      var templocation = location.href;
-     showPnxLinkHref = templocation.replace(/primo-explore/, "primo_library/libweb/action").replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1")+"&showPnx=true";
+     showPnxLinkHref = templocation.replace(/primo-explore/, "primo_library/libweb/action")+"&showPnx=true";
    } else {
      showPnxLinkHref = hrefBase.replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1")+"&showPnx=true";
    }
@@ -36,7 +36,7 @@ javascript:(function() {
    recordIdSpan.className = "show-recordid";
    recordIdSpan.innerHTML = showPnxRecId;
    recordIdSpan.style.padding = "2em 0 0 0";
-   if (! /openurl/.test(hrefBase) === true && ! /\/discovery\//.test(hrefBase) ) {
+   if (/openurl/.test(hrefBase) !== true && ! /\/discovery\//.test(hrefBase) ) {
      recordIdSpan.appendChild(showPnxLink);
    }
 
