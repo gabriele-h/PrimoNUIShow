@@ -27,9 +27,9 @@ javascript:(function() {
    /* Service Pages via old UI for the time being */
    if (/openurl/.test(location) === true) {
      var templocation = location.href;
-     showPnxLinkHref = templocation.replace(/primo-explore/, "primo_library/libweb/action")+"&showPnx=true";
+     showPnxLinkHref = templocation.replace(/primo-explore/, "primo_library/libweb/action").replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1")+"&showPnx=true";
    } else {
-     showPnxLinkHref = hrefBase+"&showPnx=true";
+     showPnxLinkHref = hrefBase.replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1")+"&showPnx=true";
    }
 
    var showPnxLink = createLink (showPnxLinkHref, "Show Pnx");
