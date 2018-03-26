@@ -36,7 +36,7 @@ javascript:(function() {
    recordIdSpan.className = "show-recordid";
    recordIdSpan.innerHTML = showPnxRecId;
    recordIdSpan.style.padding = "2em 0 0 0";
-   if (/openurl/.test(hrefBase) !== true && ! /\/discovery\//.test(hrefBase) ) {
+   if (/openurl/.test(hrefBase) !== true ) {
      recordIdSpan.appendChild(showPnxLink);
    }
 
