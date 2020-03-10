@@ -12,13 +12,13 @@ javascript:(function() {
         return obj;
     }
 
-    for (var i=0, j=showPnxLinkElem.length; i < j; i++) {
+    function appendAllLinks (elementToAppendLinks) {
 
-        var showPnxRecId = showPnxLinkElem[i].querySelector('.list-item-primary-content').getAttribute('data-recordid'),
-            resultItemChildren = showPnxLinkElem[i].parentNode.childNodes,
+        var showPnxRecId = elementToAppendLinks.querySelector('.list-item-primary-content').getAttribute('data-recordid'),
+            resultItemChildren = elementToAppendLinks.parentNode.childNodes,
             resultItemLastChild = resultItemChildren[resultItemChildren.length-1],
             recordIdSpan = document.createElement("span"),
-            hrefBase = showPnxLinkElem[i].querySelector('.media-thumbnail').querySelector('a').getAttribute('ng-href').replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1"),
+            hrefBase = elementToAppendLinks.querySelector('.media-thumbnail').querySelector('a').getAttribute('ng-href').replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1"),
             showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord").replace(/docid=/, "docId="),
             showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
             showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
@@ -53,14 +53,22 @@ javascript:(function() {
         /* Append recordid and links only once */
         if (resultItemLastChild.className !== 'show-recordid') {
             /* Prepend FRBR records with note */
-            if (showPnxLinkElem[i].querySelector('prm-search-result-frbr-line')) {
-                var prefix = document.createElement("strong");
+            if (elementToAppendLinks.querySelector('prm-search-result-frbr-line')) {
+                var prefix = document.createElement("strong"),
+                    linebreak = document.createElement("br");
                 prefix.innerHTML = 'FRBR preferred/generic record:';
-                showPnxLinkElem[i].appendChild(prefix);
-                var linebreak = document.createElement("br");
-                showPnxLinkElem[i].appendChild(linebreak);
+                elementToAppendLinks.appendChild(prefix);
+                elementToAppendLinks.appendChild(linebreak);
             }
-            showPnxLinkElem[i].parentNode.appendChild(recordIdSpan);
+            elementToAppendLinks.parentNode.appendChild(recordIdSpan);
         }
+    }
+    if (showPnxLinkElem) {
+        for (var i=0, j=showPnxLinkElem.length; i < j; i++) {
+            currentElement = showPnxLinkElem[i];
+            appendAllLinks(currentElement);
+        }
+    } else {
+        console.log('No elements found to apply showPnx bookmarklet to.')
     }
 })();
