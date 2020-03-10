@@ -36,7 +36,12 @@ javascript:(function() {
         var showPnxLink = createLink (showPnxLinkHref, "Show Pnx");
         recordIdSpan.className = "show-recordid";
         recordIdSpan.innerHTML = showPnxRecId;
-        recordIdSpan.style.padding = "2em 0 0 0";
+        /* Make identifier readable in full view (was overlapping with menu) */
+        if (location.pathname.includes('fulldisplay')) {
+            recordIdSpan.style.padding = "2em 0 0 10em";
+        } else {
+            recordIdSpan.style.padding = "2em 0 0 0";
+        }
         if (/openurl/.test(hrefBase) !== true ) {
             recordIdSpan.appendChild(showPnxLink);
         }
