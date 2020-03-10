@@ -24,13 +24,13 @@ javascript:(function() {
             showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
             showRISLink = createLink (showRISLinkHref, "Show RIS");
 
-        /* Service Pages via old UI for the time being */
-        if (/openurl/.test(location) === true) {
+        /* Service Pages via old UI for special cases */
+        if (/openurl/.test(location) === true || !elementToAppendLinks.querySelector('.urlToXmlPnx')) {
             var templocation = location.href;
             showPnxLinkHref = templocation.replace(/primo-explore/, "primo_library/libweb/action")+"&showPnx=true";
         } else {
-        /* Make use of new urlToXmlPnx */
-            showPnxLinkHref = showPnxLinkElem[i].querySelector('.urlToXmlPnx').getAttribute('data-url');
+        /* Otherwise make use of urlToXmlPnx */
+            showPnxLinkHref = elementToAppendLinks.querySelector('.urlToXmlPnx').getAttribute('data-url');
         }
 
         var showPnxLink = createLink (showPnxLinkHref, "Show Pnx");
