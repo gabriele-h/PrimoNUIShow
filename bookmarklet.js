@@ -18,8 +18,8 @@ javascript:(function() {
             resultItemChildren = elementToAppendLinks.parentNode.childNodes,
             resultItemLastChild = resultItemChildren[resultItemChildren.length-1],
             recordIdSpan = document.createElement("span"),
-            hrefBase = elementToAppendLinks.querySelector('.media-thumbnail').querySelector('a').getAttribute('ng-href').replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1"),
-            showSourceLinkHref = hrefBase.replace(/fulldisplay/, "sourceRecord").replace(/docid=/, "docId="),
+            hrefBase = elementToAppendLinks.querySelector('.item-title').querySelector('a').getAttribute('href').replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1"),
+            showSourceLinkHref = hrefBase.replace(/dbfulldisplay/, "sourceRecord").replace(/fulldisplay/, "sourceRecord").replace(/docid=/, "docId="),
             showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
             showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
             showRISLink = createLink (showRISLinkHref, "Show RIS");
