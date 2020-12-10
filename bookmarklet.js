@@ -24,27 +24,34 @@ javascript:(function() {
             showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
             showRISLink = createLink (showRISLinkHref, "Show RIS");
 
-        /* Service Pages via old UI for special cases */
-        if (/openurl/.test(location) === true || !elementToAppendLinks.querySelector('.urlToXmlPnx')) {
-            var templocation = location.href;
-            showPnxLinkHref = templocation.replace(/primo-explore/, "primo_library/libweb/action")+"&showPnx=true";
+        /* openurl needs special handling */
+        if ( /openurl/.test(location) === true && document.body.querySelectorAll('.md-dialog-is-showing') ) {
+		    iframeElement = document.querySelector("[name='AlmagetitMashupIframe']");
+			iframeSource = iframeElement.getAttribute('src');
+			openUrlSourceLink = iframeSource.replace('openurl?','openurl?svc_dat=CTO&debug=true&');
+			showOpenUrlSourceLink = createLink (openUrlSourceLink, "Show Source");
+		} else if (!elementToAppendLinks.querySelector('.urlToXmlPnx')) {
+		    console.log("No urlToXmlPnx link found.");
         } else {
         /* Otherwise make use of urlToXmlPnx */
             showPnxLinkHref = elementToAppendLinks.querySelector('.urlToXmlPnx').getAttribute('data-url');
+			var showPnxLink = createLink (showPnxLinkHref, "Show Pnx");
         }
-
-        var showPnxLink = createLink (showPnxLinkHref, "Show Pnx");
+		
         recordIdSpan.className = "show-recordid";
         recordIdSpan.innerHTML = showPnxRecId;
+		
         /* Make identifier readable in full view (was overlapping with menu) */
-        if (location.pathname.includes('fulldisplay')) {
+        if (location.pathname.includes('fulldisplay') || location.pathname.includes('openurl') ) {
             recordIdSpan.style.padding = "2em 0 0 10em";
         } else {
             recordIdSpan.style.padding = "2em 0 0 0";
         }
-        if (/openurl/.test(hrefBase) !== true ) {
+        if ( typeof showPnxLink !== "undefined" ) {
             recordIdSpan.appendChild(showPnxLink);
-        }
+        } else if ( typeof showOpenUrlSourceLink !== "undefined" ) {
+		    recordIdSpan.appendChild(showOpenUrlSourceLink);
+		}
 
         /* No Source-links for Third Node (PCI, EBSCO etc.) records */
         if (/context=L/.test(hrefBase) === true) {
