@@ -14,16 +14,23 @@ javascript:(function() {
 
     function appendAllLinks (elementToAppendLinks) {
 
-        var showPnxRecId = elementToAppendLinks.querySelector('.list-item-primary-content').getAttribute('data-recordid'),
-            resultItemChildren = elementToAppendLinks.parentNode.childNodes,
-            resultItemLastChild = resultItemChildren[resultItemChildren.length-1],
-            recordIdSpan = document.createElement("span"),
-            hrefBase = elementToAppendLinks.querySelector('.item-title').querySelector('a').getAttribute('href').replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1"),
-            showSourceLinkHref = hrefBase.replace(/dbfulldisplay/, "sourceRecord").replace(/fulldisplay/, "sourceRecord").replace(/docid=/, "docId="),
-            showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
-            showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
-            showRISLink = createLink (showRISLinkHref, "Show RIS");
+	/* This try block is necessary for the "preloaded" empty results items */
+	try {
+	        var showPnxRecId = elementToAppendLinks.querySelector('.list-item-primary-content').getAttribute('data-recordid'),
+	            resultItemChildren = elementToAppendLinks.parentNode.childNodes,
+	            resultItemLastChild = resultItemChildren[resultItemChildren.length-1],
+	            recordIdSpan = document.createElement("span"),
+	            hrefBase = elementToAppendLinks.querySelector('.item-title').querySelector('a').getAttribute('href').replace(/docid=.*?(&|$)/, "docid="+showPnxRecId+"$1"),
+	            showSourceLinkHref = hrefBase.replace(/dbfulldisplay/, "sourceRecord").replace(/fulldisplay/, "sourceRecord").replace(/docid=/, "docId="),
+	            showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
+	            showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
+	            showRISLink = createLink (showRISLinkHref, "Show RIS");
+    	} catch(error): {
+		console.log('Empty preloaded element ignored.')
+		return;
+	}
 
+	
         /* openurl needs special handling */
         if ( /openurl/.test(location) === true && document.body.querySelectorAll('.md-dialog-is-showing') ) {
             iframeElement = document.querySelector("[name='AlmagetitMashupIframe']");
