@@ -25,8 +25,8 @@ javascript:(function() {
 	            showSourceLink = createLink (showSourceLinkHref, "Show Source Record"),
 	            showRISLinkHref = "../primo_library/libweb/action/display.do?doc="+showPnxRecId+"&vid="+urlParamVid+"&showRIS=true",
 	            showRISLink = createLink (showRISLinkHref, "Show RIS");
-    	} catch(error): {
-		console.log('Empty preloaded element ignored.')
+    	} catch(error) {
+		console.log('Empty preloaded element ignored.');
 		return;
 	}
 
